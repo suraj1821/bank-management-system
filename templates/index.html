@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Font Awesome for eye icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+        .password-container input {
+            width: 100%;
+            padding-right: 30px; /* Space for the eye icon */
+        }
+        .password-container i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to OG'S Super International Bank</h1>
+
+        <!-- Login Form -->
+<div id="login-form">
+    <form action="/login" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="login-email" name="email" placeholder="" required><br>
+        <label for="password">Password:</label>
+        <div class="password-container">
+            <input type="password" id="login-password" name="password" placeholder="" required>
+            <i class="fas fa-eye" id="toggle-login-password" onclick="toggleLoginPassword()"></i>
+        </div><br>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="javascript:void(0);" onclick="showSignupForm()">Sign Up</a></p>
+</div>
+
+<!-- Sign Up Form -->
+<div id="signup-form" style="display: none;">
+    <form action="/signup" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="" required><br>
+        <label for="password">Password:</label>
+        <div class="password-container">
+            <input type="password" id="signup-password" name="password" placeholder="" required><br>
+            <i class="fas fa-eye" id="toggle-password" onclick="toggleSignupPassword()"></i>
+        </div><br>
+        <label for="confirm_password">Confirm Password:</label>
+        <div class="password-container">
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="" required><br>
+            <i class="fas fa-eye" id="toggle-confirm-password" onclick="toggleSignupPassword()"></i>
+        </div><br>
+        <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="javascript:void(0);" onclick="showLoginForm()">Login</a></p>
+</div>
+
+
+<script>
+    // Toggle password visibility for login
+    function toggleLoginPassword() {
+        var password = document.getElementById('login-password');
+        var toggleIcon = document.getElementById('toggle-login-password');
+        if (password.type === "password") {
+            password.type = "text";
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            password.type = "password";
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    }
+
+    // Toggle password visibility for signup
+    function toggleSignupPassword() {
+        var password = document.getElementById('signup-password');
+        var confirmPassword = document.getElementById('confirm_password');
+        var toggleIcon = document.getElementById('toggle-password');
+        var toggleConfirmIcon = document.getElementById('toggle-confirm-password');
+        
+        // Toggle signup password visibility
+        if (password.type === "password") {
+            password.type = "text";
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            password.type = "password";
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+
+        // Toggle confirm password visibility
+        if (confirmPassword.type === "password") {
+            confirmPassword.type = "text";
+            toggleConfirmIcon.classList.remove('fa-eye');
+            toggleConfirmIcon.classList.add('fa-eye-slash');
+        } else {
+            confirmPassword.type = "password";
+            toggleConfirmIcon.classList.remove('fa-eye-slash');
+            toggleConfirmIcon.classList.add('fa-eye');
+        }
+    }
+
+    // Show login form and hide signup form
+    function showLoginForm() {
+        document.getElementById('login-form').style.display = "block";
+        document.getElementById('signup-form').style.display = "none";
+    }
+
+    // Show signup form and hide login form
+    function showSignupForm() {
+        document.getElementById('login-form').style.display = "none";
+        document.getElementById('signup-form').style.display = "block";
+    }
+</script>
+
+</body>
+</html>
