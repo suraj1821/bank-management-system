@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ session['user_email'] }}</h1>
+
+        <h2>Your Balance: ${{ user_balance }}</h2>
+
+        
+        <form action="/deposit" method="POST">
+            <label for="deposit_amount">Deposit Amount:</label>
+            <input type="number" id="deposit_amount" name="amount" placeholder="Enter amount" required><br>
+            <button type="submit">Deposit</button>
+        </form>
+        
+
+        
+        <form action="/withdraw" method="POST">
+            <label for="withdraw_amount">Withdraw Amount:</label>
+            <input type="number" id="withdraw_amount" name="withdraw_amount" placeholder="Enter amount" required><br>
+            <button type="submit">Withdraw</button>
+        </form>
+
+        
+        <form action="/transfer" method="POST">
+            <label for="recipient_email">Recipient's Email:</label>
+            <input type="email" id="recipient_email" name="recipient_email" placeholder="Enter recipient's email" required><br>
+            <label for="transfer_amount">Amount to Transfer:</label>
+            <input type="number" id="transfer_amount" name="transfer_amount" placeholder="Enter amount" required><br>
+            <button type="submit">Transfer</button>
+        </form>
+
+        <p><a href="/logout">Log Out</a></p>
+    </div>
+</body>
+</html>
